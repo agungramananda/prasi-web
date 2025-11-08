@@ -50,7 +50,7 @@ class NewsController extends Controller
             'tags' => ['nullable','string'], // comma separated
             'header_image' => ['nullable','image','max:10240'],
             'is_active' => ['sometimes','boolean'],
-            'published_at' => ['nullable','date'],
+            // published_at removed from form: we'll set it automatically to now()
         ]);
 
         if ($request->hasFile('header_image')) {
@@ -83,7 +83,8 @@ class NewsController extends Controller
             'header_image' => $data['header_image'] ?? null,
             'tags' => $data['tags'],
             'is_active' => $data['is_active'],
-            'published_at' => $data['published_at'] ?? null,
+            // set published_at to now() on create
+            'published_at' => now(),
         ]);
         // Set translations
         $news->setTranslations('title', [
@@ -115,7 +116,7 @@ class NewsController extends Controller
             'tags' => ['nullable','string'],
             'header_image' => ['nullable','image','max:102048'],
             'is_active' => ['sometimes','boolean'],
-            'published_at' => ['nullable','date'],
+            // published_at removed from form: we set it automatically to now() on update
         ]);
 
         if ($request->hasFile('header_image')) {
@@ -150,7 +151,8 @@ class NewsController extends Controller
             'slug' => $data['slug'] ?? $news->slug,
             'tags' => $data['tags'],
             'is_active' => $data['is_active'],
-            'published_at' => $data['published_at'] ?? null,
+            // set published_at to now() on update (publish immediately)
+            'published_at' => now(),
             'header_image' => $data['header_image'] ?? $news->header_image,
         ]);
         // header image handled above

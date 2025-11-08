@@ -20,7 +20,11 @@
         @if($products->count() > 0)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             @foreach($products as $product)
+            @if(!empty($product->slug))
+            <a href="{{ route('products.show', $product->slug) }}" class="group block bg-white rounded-lg border border-brand-stone/60 shadow-subtle hover:shadow-elevated transition overflow-hidden">
+            @else
             <div class="group bg-white rounded-lg border border-brand-stone/60 shadow-subtle hover:shadow-elevated transition overflow-hidden">
+            @endif
                 @if($product->image)
                 <div class="h-64 overflow-hidden bg-brand-sand/60">
                 <img src="{{ $product->image_url }}" 
@@ -57,7 +61,11 @@
                     </div>
                     @endif
                 </div>
+            @if(!empty($product->slug))
+            </a>
+            @else
             </div>
+            @endif
             @endforeach
         </div>
 

@@ -75,6 +75,20 @@ class PageController extends Controller
         return view('pages.products', compact('products'));
     }
 
+    public function productShow(string $slug)
+    {
+        $query = Product::where('slug', $slug)->active();
+        $item = $query->firstOrFail();
+
+        // related products (exclude current)
+        $related = Product::active()->where('id', '!=', $item->id)->latest()->take(6)->get();
+
+        return view('products.show', [
+            'item' => $item,
+            'related' => $related,
+        ]);
+    }
+
     public function contact()
     {
         $socialMedia = SocialMedia::active()->get();

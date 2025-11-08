@@ -33,7 +33,11 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($featuredProducts as $product)
+            @if(!empty($product->slug))
+            <a href="{{ route('products.show', $product->slug) }}" class="group block bg-white rounded-lg border border-brand-stone/60 shadow-subtle hover:shadow-elevated transition overflow-hidden">
+            @else
             <div class="group bg-white rounded-lg border border-brand-stone/60 shadow-subtle hover:shadow-elevated transition overflow-hidden">
+            @endif
                 <div class="h-56 bg-brand-sand/60 overflow-hidden">
                     @if($product->image)
                         <img src="{{ $product->image_url }}" alt="{{ $product->getTranslation('name', app()->getLocale()) }}" class="w-full h-full object-cover group-hover:scale-[1.03] transition" loading="lazy" decoding="async" />
@@ -53,10 +57,13 @@
                         @if($product->price)
                         <span class="text-brand-gold font-semibold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                         @endif
-                        <a href="{{ route('products') }}" class="text-sm text-brand-navy hover:text-brand-gold">{{ __('Detail') }}</a>
                     </div>
                 </div>
+            @if(!empty($product->slug))
+            </a>
+            @else
             </div>
+            @endif
             @endforeach
         </div>
     </div>

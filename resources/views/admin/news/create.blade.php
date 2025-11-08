@@ -68,11 +68,8 @@
                 <input type="checkbox" name="is_active" value="1" id="is_active" checked />
                 <label for="is_active">{{ __('Is Active') }}</label>
             </div>
-            <div>
-                <label class="block text-sm text-brand-navy/70 mb-1">{{ __('Published At') }}</label>
-                <input type="datetime-local" name="published_at" class="w-full border rounded px-3 py-2" value="{{ old('published_at') }}" />
-                <p class="mt-1 text-[11px] text-brand-navy/50">{{ __('Biarkan kosong untuk draft atau jadwalkan di masa depan.') }}</p>
-            </div>
+            <!-- Published At removed: created news will be published immediately (published_at set by system) -->
+            <div></div>
         </div>
         <div>
             <button class="px-5 py-2 rounded-md bg-brand-gold text-brand-navy font-medium">{{ __('Create') }}</button>

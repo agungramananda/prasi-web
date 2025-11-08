@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/products', [PageController::class, 'products'])->name('products');
+Route::get('/products/{slug}', [PageController::class, 'productShow'])->name('products.show');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'submitContact'])
     ->middleware('throttle:contact')
